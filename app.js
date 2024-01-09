@@ -1,7 +1,13 @@
 const container = document.querySelector(".container");
 const resetButton = document.querySelector('button');
 
+const randomRgb = () => {
+    const r = Math.floor(Math.random() * 256)
+    const g = Math.floor(Math.random() * 256)
+    const b = Math.floor(Math.random() * 256)
 
+    return {r, g, b}
+}
 
 const createGrid = (amtOfGrid) => {
     const wrapper = document.createElement('div')
@@ -11,14 +17,16 @@ const createGrid = (amtOfGrid) => {
         row.classList.add("grid-row")
 
         for (let j = 0; j < amtOfGrid; j++) {
-            const widthAndHeight = 960 / amtOfGrid
+            const {r, g, b} = randomRgb()
+            const widthAndHeight = 400 / amtOfGrid
             const gridBox = document.createElement("div")
             gridBox.classList.add('grid-box')
             gridBox.style.width = `${widthAndHeight}px`
             gridBox.style.height = `${widthAndHeight}px`
             // adding event listener to change the background of the div when mouse enters div
             gridBox.addEventListener('mouseenter', () => {
-                gridBox.style.backgroundColor = "black"
+                const bgColor = "rgb("+ r + ',' + g + ',' + b + ")"
+                gridBox.style.background = bgColor
             })
             row.appendChild(gridBox)
         }
